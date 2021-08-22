@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
-
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseUser currentUser;
 
 
-    private Toolbar mToolbar;
+    private Toolbar toolbar;
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private TabsAccessorAdapter tabsAccessorAdapter;
@@ -36,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
 
-        mToolbar = findViewById(R.id.main_page_toolbar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Amra Amrai to");
+        toolbar = findViewById(R.id.main_page_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("WhatsApp");
 
 
         viewPager = (ViewPager) findViewById(R.id.main_tabs_pager);
