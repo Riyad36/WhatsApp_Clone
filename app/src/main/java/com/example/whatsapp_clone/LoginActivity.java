@@ -56,13 +56,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void Login() {
-        String email = et_login_email.getText().toString();
-        String password = et_login_password.getText().toString();
+        String login_email = et_login_email.getText().toString();
+        String login_password = et_login_password.getText().toString();
 
-        if(TextUtils.isEmpty(email)){
+        if(TextUtils.isEmpty(login_email)){
             Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show();
         }
-        if(TextUtils.isEmpty(password)){
+        if(TextUtils.isEmpty(login_password)){
             Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show();
         }
         else {
@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             loading_bar.setCanceledOnTouchOutside(true);
             loading_bar.show();
 
-            mAuth.signInWithEmailAndPassword(email, password)
+            mAuth.signInWithEmailAndPassword(login_email, login_password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -119,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
     private void sendUserToLMainActivity() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
+        System.out.println("###############CureentUser############"+currentUser);
     }
 
     private void sendUserToLRegisterActivity() {
