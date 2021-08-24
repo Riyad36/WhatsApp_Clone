@@ -22,7 +22,6 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
 
-    private FirebaseUser currentUser;
     private FirebaseAuth mAuth;
     private ProgressDialog loading_bar;
 
@@ -37,7 +36,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-        currentUser = mAuth.getCurrentUser();
         InitializeFields();
 
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -106,20 +104,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        if(currentUser != null){
-            sendUserToLMainActivity();
-        }
-
-    }
     private void sendUserToLMainActivity() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        System.out.println("###############CureentUser############"+currentUser);
+        finish();
     }
 
     private void sendUserToLRegisterActivity() {
