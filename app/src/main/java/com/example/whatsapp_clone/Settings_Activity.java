@@ -1,11 +1,24 @@
 package com.example.whatsapp_clone;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.style.UpdateAppearance;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -15,6 +28,10 @@ public class Settings_Activity extends AppCompatActivity {
     private EditText et_Update_Name, et_Update_Status;
     private CircleImageView UserProfileImage;
 
+    private String currentUserID;
+    private FirebaseAuth mAuth;
+    private DatabaseReference RootRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +39,60 @@ public class Settings_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_settings_);
 
         initialize();
+
+        mAuth = FirebaseAuth.getInstance();
+        currentUserID = mAuth.getCurrentUser().getUid();
+        RootRef = FirebaseDatabase.getInstance().getReference();
+
+        btn_Update_Account_Setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                UpdateSetting();
+
+            }
+        });
+    }
+
+    private void UpdateSetting() {
+        String update_name = et_Update_Name.getText().toString();
+        String update_status = et_Update_Status.getText().toString();
+
+        if(TextUtils.isEmpty(update_name)){
+            Toast.makeText(Settings_Activity.this, "Please write your name", Toast.LENGTH_SHORT).show();
+
+        }
+        if(TextUtils.isEmpty(update_status)){
+            Toast.makeText(Settings_Activity.this, "Please write your status", Toast.LENGTH_SHORT).show();
+
+        }
+        else{
+
+            HashMap<String, String> profilemap = new HashMap<>();
+            profilemap.put("uid", currentUserID);
+            profilemap.put("name", update_name);
+            profilemap.put("status", update_status);
+
+            RootRef.child("Users").child(currentUserID).setValue(profilemap)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+
+                            if(task.isSuccessful())
+                            {
+                                sendUserToLMainActivity();
+                                Toast.makeText(Settings_Activity.this, "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                String message = task.getException().toString();
+                                Toast.makeText(Settings_Activity.this, "Error: " + message, Toast.LENGTH_SHORT).show();
+
+                            }
+
+                        }
+                    });
+
+        }
     }
 
     private void initialize() {
@@ -31,4 +102,13 @@ public class Settings_Activity extends AppCompatActivity {
         et_Update_Name = findViewById(R.id.set_user_name);
         et_Update_Status = findViewById(R.id.set_profile_status);
     }
+
+    private void sendUserToLMainActivity() {
+        Intent intent = new Intent(Settings_Activity.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+
 }
