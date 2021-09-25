@@ -1,6 +1,7 @@
 package com.example.whatsapp_clone;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -121,11 +122,19 @@ public class MainActivity extends AppCompatActivity {
 
             sendUserToSettingActivity();
         }
-//
-//        if(item.getItemId() == R.id.main_find_friend_options){
-//
-//        }
+
+        if(item.getItemId() == R.id.main_find_friend_options){
+
+        }
+        if(item.getItemId() == R.id.main_create_group_options){
+            RequestnewGroup();
+
+        }
         return true;
+    }
+
+    private void RequestnewGroup() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
     }
 
     private void sendUserToLoginActivity() {
