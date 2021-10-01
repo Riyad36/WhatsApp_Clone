@@ -15,13 +15,13 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/login_image"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:src="@drawable/login_photo"
+                android:src="@drawable/whats"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:scaleType="fitCenter"
@@ -35,7 +35,6 @@
                 android:layout_below="@+id/login_image"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:background="@drawable/inputs"
                 android:padding="4dp"
                 android:drawableStart="@drawable/email"
                 android:layout_marginTop="25dp"
@@ -51,7 +50,6 @@
                 android:layout_below="@+id/login_email"
                 android:hint="Password"
                 android:inputType="textPassword"
-                android:background="@drawable/inputs"
                 android:padding="4dp"
                 android:drawableStart="@drawable/password"
                 android:layout_marginTop="10dp"
@@ -65,7 +63,7 @@
                 android:layout_below="@+id/login_password"
                 android:layout_centerHorizontal="true"
                 android:text="Forget your password?"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="23dp"
                 android:textAlignment="textEnd"
@@ -83,10 +81,9 @@
                 android:text="Sign In"
                 android:background="@drawable/buttons"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="19dp"
-                android:layout_marginLeft="19dp"
+                android:layout_marginHorizontal="30dp"
                 android:textAllCaps="false"
-                android:textSize="24sp"
+                android:textSize="14sp"
                 android:textColor="@color/cardview_light_background"/>
 
             <TextView
@@ -111,7 +108,7 @@
                 android:layout_below="@+id/do_not_have_account_link"
                 android:layout_centerHorizontal="true"
                 android:text="or Login using your"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="23dp"
                 android:textAlignment="center"
@@ -124,15 +121,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/login_using_phone"
                 android:padding="4dp"
-                android:text="Phone"
+                android:text="Login With Phone"
+                android:layout_alignParentBottom="true"
                 android:background="@drawable/buttons"
                 android:layout_marginTop="4dp"
-                android:layout_marginRight="19dp"
-                android:layout_marginLeft="19dp"
+                android:layout_marginHorizontal="30dp"
                 android:textAllCaps="false"
                 android:textSize="14sp"
                 android:textColor="@color/cardview_light_background"
-                android:drawableStart="@drawable/phone"
                 />
 
 
