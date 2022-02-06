@@ -111,6 +111,7 @@ public class Settings_Activity extends AppCompatActivity {
 
                         if(task.isSuccessful()){
                             Toast.makeText(Settings_Activity.this, "Profile Image Uploded Successfully", Toast.LENGTH_SHORT).show();
+                            
                         }
                         else {
                             String message = task.getException().toString();
